@@ -14,41 +14,40 @@ import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTaskDto {
-  @ApiProperty()
+  @ApiProperty({ example: 'Implement login feature' })
   @IsNotEmpty()
   @IsString()
   title: string;
 
-  @ApiProperty()
-  @IsOptional()
+  @ApiProperty({ example: 'Create authentication flow and UI components' })
+  @IsNotEmpty()
   @IsString()
-  description?: string;
+  description: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 4.5 })
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
-  @Type(() => Number)
   hourEstimate: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2025-03-15' })
   @IsNotEmpty()
   @IsDateString()
   dueDate: string;
 
-  @ApiProperty()
-  @IsOptional()
+  @ApiProperty({ enum: TaskStatus, example: 'ACTIVE' })
+  @IsNotEmpty()
   @IsEnum(TaskStatus)
-  status?: TaskStatus;
+  status: TaskStatus;
 
-  @ApiProperty()
+  @ApiProperty({ example: 350.0 })
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
-  @Type(() => Number)
   monetaryCost: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: ['uuid1', 'uuid2'], type: [String] })
+  @IsNotEmpty()
   @IsArray()
   @IsUUID('4', { each: true })
   assignedUsers: string[];

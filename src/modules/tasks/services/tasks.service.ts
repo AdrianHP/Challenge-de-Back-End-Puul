@@ -43,8 +43,7 @@ export class TasksService {
   async findAll(filters: TaskFilterDto) {
     const {
       title,
-      dueDateStart,
-      dueDateEnd,
+      dueDate,
       assignedUserId,
       assignedUserName,
       assignedUserEmail,
@@ -57,16 +56,8 @@ export class TasksService {
       where.title = { contains: title, mode: 'insensitive' };
     }
 
-    if (dueDateStart || dueDateEnd) {
-      where.dueDate = {};
-
-      if (dueDateStart) {
-        where.dueDate.gte = new Date(dueDateStart);
-      }
-
-      if (dueDateEnd) {
-        where.dueDate.lte = new Date(dueDateEnd);
-      }
+    if (dueDate) {
+      where.dueDate.lte = dueDate;
     }
 
     // Filter by assigned user
