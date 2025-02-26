@@ -24,9 +24,6 @@ async function bootstrap() {
     .setTitle('Task Management API')
     .setDescription('API for team task management')
     .setVersion('1.0')
-    .addTag('tasks')
-    .addTag('users')
-    .addTag('analytics')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
@@ -34,5 +31,3 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
-
-// Enable validation pipe

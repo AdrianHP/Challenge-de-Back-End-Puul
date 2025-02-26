@@ -14,7 +14,7 @@ model User {
   role       Role         @default(MEMBER)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-  UserToTask UserToTask[]
+  TaskUser TaskUser[]
 
   @@map("users")
 }
@@ -29,20 +29,22 @@ model Task {
   monetaryCost Float
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
-  UserToTask   UserToTask[]
+  TaskUser   TaskUser[]
 
   @@map("tasks")
 }
 
-model UserToTask {
-  A     String
-  B     String
-  tasks Task   @relation(fields: [A], references: [id], onDelete: Cascade)
-  users User   @relation(fields: [B], references: [id], onDelete: Cascade)
+model TaskUser {
+  id        Int      @id @default(autoincrement())
+  taskId    String      
+  userId    String      
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@id([A, B], map: "_UserToTask_AB_pkey")
-  @@index([B], map: "_UserToTask_B_index")
-  @@map("_UserToTask")
+  @@unique([taskId, userId])
+  @@map("task_users")
 }
 
 enum Role {
