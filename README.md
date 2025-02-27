@@ -40,9 +40,6 @@ npx prisma migrate dev --name init
 # Development
 npm run start:dev
 
-# Production
-npm run build
-npm run start:prod
 ```
 
 ## 🐳 Docker Deployment
@@ -59,6 +56,6 @@ docker-compose up -d
 docker-compose exec api npx prisma migrate deploy
 ```
 
-Change the `DATABASE_URL` in the docker-compose too.Im using a local database.
+Change the `DATABASE_URL` in the docker-compose too. I'm using a local database.
 
 
