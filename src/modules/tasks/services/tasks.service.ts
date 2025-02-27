@@ -44,6 +44,7 @@ export class TasksService {
     const {
       title,
       dueDate,
+      status,
       assignedUserId,
       assignedUserName,
       assignedUserEmail,
@@ -57,7 +58,12 @@ export class TasksService {
     }
 
     if (dueDate) {
-      where.dueDate.lte = dueDate;
+      where.dueDate = {
+        lte: new Date(dueDate),
+      };
+    }
+    if (status) {
+      where.status = status;
     }
 
     // Filter by assigned user
