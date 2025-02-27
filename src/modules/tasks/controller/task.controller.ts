@@ -58,7 +58,7 @@ export class TasksController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a tasks by id' })
-  findOne(@Param('id', ParseIntPipe) id: string) {
+  findOne(@Param('id') id: string) {
     return this.tasksService.findOne(id);
   }
 
